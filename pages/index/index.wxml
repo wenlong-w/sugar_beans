@@ -1,0 +1,14 @@
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:key="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" id="{{item}}" bindtap='topDo' mode='aspectFill' style='width:100%;height:186px' />
+    </swiper-item>
+  </block>
+</swiper>
+<view class="index-container">
+  <view class='story-row' wx:for="{{rowLine}}">
+    <view>111</view>
+    <view>222</view>
+  </view>
+</view>
