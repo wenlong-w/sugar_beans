@@ -8,14 +8,13 @@ const globalAudioListManager = app.courseAudioListManager;
 
 Page({
   data: {
-    motto: 'Hello World',
-    rowLine: ['',''],
+    rowLine: ['', ''],
     imgUrls: [
       '../image/index/listenToMe.jpg',
       // '../image/doPraise.jpg',
       '../image/index/diary.jpg'
       // '../image/listenToMe.jpg',
-      // '../image/topPraise.jpg'
+      // 'http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg'
     ],
     indicatorDots: true,
     autoplay: true,
@@ -31,7 +30,7 @@ Page({
   onShow: function () {
     console.log('index onshow');
     wx.setNavigationBarTitle({
-      title: '糖豆妈妈讲故事'
+      title: '糖豆妈妈睡前故事'
     });
     globalAudioListManager.audioList = [];
     globalAudioListManager.albumAudioList = [];
@@ -197,5 +196,18 @@ Page({
         }
       );
     }
+  },
+  /**
+   * 准备播放某个故事
+   */
+  toDoStory: function (event) {
+    let id = event.currentTarget.id;
+    console.log('event.currentTarget:', event.currentTarget);
+    // for (var audio of globalAudioListManager.audioList) {
+    //   if (audio.id == id) {
+    //     globalAudioListManager.currentAudio = audio;
+    //   }
+    // }
+    util.playStory();
   },
 })

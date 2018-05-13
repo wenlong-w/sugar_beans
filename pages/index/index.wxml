@@ -1,3 +1,4 @@
+<import src="../template/indexStory/indexStory.wxml"/>
 <swiper indicator-dots="{{indicatorDots}}"
   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
   <block wx:for="{{imgUrls}}" wx:key="{{imgUrls}}">
@@ -7,8 +8,17 @@
   </block>
 </swiper>
 <view class="index-container">
-  <view class='story-row' wx:for="{{rowLine}}">
-    <view>111</view>
-    <view>222</view>
+  <view class='story-album-operate'>
+    <view class='story-album'>
+      <view class='album-title'>故事专辑</view>
+      <view class='album-title-explain'>每个小故事由多个组成</view>
+    </view>
+    <view class='top-more-operate'>更多</view>
   </view>
+  <view class='story-block'>
+    <view class='story-row' wx:key="{{rowLine}}" wx:for="{{rowLine}}">
+      <template is="indexStory"/>
+    </view>
+  </view>
+  <view class='bottom-more-operate'>更多故事</view>
 </view>

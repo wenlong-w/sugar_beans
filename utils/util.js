@@ -1,3 +1,8 @@
+const playStory = () => {
+  wx.navigateTo({
+    url: '../playStory/playStory'
+  })
+}
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -130,6 +135,7 @@ const add_zero = temp => {
   else return temp;
 }
 module.exports = {
+  playStory: playStory,
   formatTime: formatTime,
   getDate: getDate,
   checkImgFileUrl: checkImgFileUrl,

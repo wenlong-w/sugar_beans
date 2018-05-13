@@ -1,0 +1,29 @@
+.play-container{
+  display:flex;
+  flex-direction:column;
+
+}
+.play-top{
+  
+}
+.process-value{
+  display:flex;
+  justify-content:space-between;
+  padding:0 16px;
+
+}
+.process-body{
+  height: 5vh;
+}
+.process-value text {
+  color: #FFFFFF
+}
+.play-bottom{
+  background: url(http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg) no-repeat center center;
+  height: 50vh;
+  background-size: 100% 100%;  
+  filter: blur(28px);   
+}
+.story-title{
+  color:blue
+}
