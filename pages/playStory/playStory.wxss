@@ -18,12 +18,53 @@
 .process-value text {
   color: #FFFFFF
 }
-.play-bottom{
+.play-bottom-img{
   background: url(http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg) no-repeat center center;
-  height: 50vh;
+  /*height: 50vh;
   background-size: 100% 100%;  
-  filter: blur(28px);   
+   filter: blur(28px);    */
 }
-.story-title{
-  color:blue
+.content {
+  color: #ffffff;
+  font-size: 22px;
+  height:44vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.bg {
+  background: url(http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg);
+  height:44vh;
+  text-align: center;
+}
+.bg-blur {
+    float: left;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: blur(36px);
+}
+.content-front {
+  position:absolute;
+  width: 750rpx;
+}
+.title{
+  display: flex;
+  justify-content:center;
+}
+.play-button {
+  display: flex;
+  justify-content: space-around;
+  align-self: center;
+  width: 580rpx;
+}
+.operate-button{
+  display: flex;
+  justify-content: space-around;
+}
+.play-img {
+  width: 8vw;
+  height: 8vh;
+  padding: 0rpx 60rpx;
 }

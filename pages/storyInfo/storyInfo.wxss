@@ -1,0 +1,63 @@
+@import "../template/storyList/storyList.wxss";
+.info-container {
+  height: 100%;
+  display: flex;
+  flex-direction:column;
+} 
+.info-title{
+  padding: 10px 10px;
+  background-color: #ffffff;
+}
+.info-title-money{
+  color: red;
+  margin-top: 10px;
+}
+.info-body{
+  margin-top: 10px;  
+  background-color: #ffffff;
+}
+.swiper-tab{
+    width: 100%;
+    border-bottom: 2rpx solid #ccc;
+    text-align: center;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+.swiper-tab-item{
+    width: 50%; 
+    color:#434343;
+}
+.active{
+    color:#F65959;
+    border-bottom: 4rpx solid #F65959;
+}
+.info-slide-image{
+  width: 100%; 
+  display: ''
+}
+.tip-title{
+  color:red;
+  font-size: 16px;
+  margin-top: 6px;
+}
+.tip-content{
+  margin: 6px 0px;
+  font-size: 16px;
+}
+.add_btn{  
+  display:flex;
+  width: 100%;  
+  bottom: 0px;  
+  position:fixed;
+}  
+.btn{  
+  width: 50%;  
+  border-radius:0px;
+}  
+.btn.btn2{
+  background: #F65959;  
+  color: #fff;  
+}

@@ -7,14 +7,33 @@
         backgroundColor="#FFF"
         block-size="20" 
         block-color="#FFA500"/>
-      </view>
-      <view class='process-value'>
-        <text class="current-process">01:28</text>
-        <text class="total-process">12:08</text>
-      </view>
-  <view class='play-bottom'>
-    <view class='story-title'>阿里巴巴和四十大盗</view>
-    <view>阿里巴巴和四十大盗</view>
+  </view>
+  <view class='process-value'>
+    <text class="current-process">01:28</text>
+    <text class="total-process">12:08</text>
+  </view>
+  <view>
+    <view class='bg bg-blur'></view>
+      <view class='content content-front'>
+        <view class='title'>阿里巴巴与四十大盗</view>
+        <view class='play-button'>
+          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='beforeStory'></image>
+          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img'></image>
+          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img'bindtap='nextStory'></image>
+        </view>
+        <view class='operate-button'>
+          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toCollect'></image>
+          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toPraise'></image>
+          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toSetTime'></image>
+          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toShare'></image>
+        </view>
+      </view>   
   </view>
   
+
+
+  <!--https://blog.csdn.net/libin_1/article/details/51927430
+  https://www.cnblogs.com/PeunZhang/p/4089894.html 
+  https://blog.csdn.net/ohehehou/article/details/51975539
+   -->
 </view>

@@ -8,7 +8,7 @@ const globalAudioListManager = app.courseAudioListManager;
 
 Page({
   data: {
-    rowLine: ['', ''],
+    rowLine: ['', '', '', '', '', ''],
     imgUrls: [
       '../image/index/listenToMe.jpg',
       // '../image/doPraise.jpg',
@@ -210,4 +210,13 @@ Page({
     // }
     util.playStory();
   },
+
+  /**
+   * 跳转到故事详情介绍页
+   */
+  toStoryInfo: function (){
+    wx.navigateTo({
+      url: '../storyInfo/storyInfo'
+    })
+  }
 })

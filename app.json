@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/playStory/playStory",
     "pages/index/index",
-    "pages/mine/mine"
-    
+    "pages/mine/mine",
+    "pages/storyInfo/storyInfo",
+    "pages/playStory/playStory"
   ],
   "window":{
     "backgroundTextStyle":"light",

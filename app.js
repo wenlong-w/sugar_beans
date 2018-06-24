@@ -42,7 +42,7 @@ App({
     })
   },
   onShow: function (options) {
-    console.log('app onShow')
+    // console.log('app onShow')
   },
   courseAudioListManager: {
     currentAudio: {},

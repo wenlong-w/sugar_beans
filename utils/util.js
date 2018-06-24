@@ -1,3 +1,30 @@
+const imageUtil = (e) => {
+  var imageSize = {};
+  var originalWidth = e.detail.width;//图片原始宽  
+  var originalHeight = e.detail.height;//图片原始高  
+  console.log('e.detail', e.detail);
+  var originalScale = originalHeight / originalWidth;//图片高宽比  
+  //获取屏幕宽高  
+  wx.getSystemInfo({
+    success: function (res) {
+      var windowWidth = res.windowWidth;
+      var windowHeight = res.windowHeight;
+      var windowscale = windowHeight / windowWidth;//屏幕高宽比 
+      if (originalScale > windowscale) {//图片高宽比大于屏幕高宽比  
+        //图片缩放后的宽为屏幕宽  
+        imageSize.imageWidth = windowWidth;
+        imageSize.imageHeight = (windowWidth * originalHeight) / originalWidth;
+      } else {//图片高宽比小于屏幕高宽比 
+        //图片缩放后的高为屏幕高  
+        imageSize.imageHeight = windowHeight;
+        imageSize.imageWidth = (windowHeight * originalWidth) / originalHeight;
+      }
+    }
+  })
+  console.log('缩放后的宽: ' + imageSize.imageWidth)
+  console.log('缩放后的高: ' + imageSize.imageHeight)
+  return imageSize;
+}  
 const playStory = () => {
   wx.navigateTo({
     url: '../playStory/playStory'
@@ -140,4 +167,5 @@ module.exports = {
   getDate: getDate,
   checkImgFileUrl: checkImgFileUrl,
   stampFormatTime: stampFormatTime,
+  imageUtil: imageUtil  
 }

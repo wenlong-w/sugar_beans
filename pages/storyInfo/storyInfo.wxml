@@ -1,0 +1,35 @@
+
+<import src="../template/storyList/storyList.wxml"/>
+    <image src="http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg"    mode='widthFix' style='width:100%;' />
+    <view class='info-title'>
+      <view>白雪公主的故事</view>
+      <view class='info-title-money'>9.9元</view>
+    </view>
+    <view class='info-body'>
+      <view class="swiper-tab">
+          <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">简介</view>
+          <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">故事</view>
+      </view>
+      <swiper current="{{currentTab}}" duration="300"  bindchange="swiperTab" style="height:{{swiperHeight}}px">
+          <swiper-item>
+            <image style="width: {{imageWidth}}px; height: {{imageHeight}}px;"  src="../image/test.jpg" bindload="imageLoad"></image>
+            <view class='tip-title'>购买须知</view>
+            <view class='tip-content'>1、产品一经购买，长期有效，内容可以反复收听，不受次数限制。</view>
+            <view class='tip-content'>2、本产品为故事音频，属于虚拟内容服务，购买成功后不可退款、转让，请您理解。</view>
+          </swiper-item>
+          <swiper-item>
+            <view wx:for="{{audioList}}" wx:key="{{id}}" class='audio-template' >
+              <template is="audioItem" data="{{...item}}"/>
+            </view>
+          </swiper-item>
+      </swiper>
+    </view>
+  <view class='add_btn'>  
+    <button class='btn btn1' bindtap='toListen'>  
+        试听
+    </button>  
+    <button class='btn btn2'>  
+        立即购买  
+    </button> 
+  </view>
+
