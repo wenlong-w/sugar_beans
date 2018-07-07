@@ -1,7 +1,7 @@
 <template name='indexStory'>
   <view id='{{id}}' class='story-view' bindtap="toStoryInfo">
-    <image src="http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg" mode='widthFix' style='width:46vw;' />
-    <view class='story-title'>白雪公主的故事</view>
-    <view class='story-title-explain'>我们小时候爱听的白雪公主</view>
+    <image src="{{imgUrl}}" mode='widthFix' style='width:46vw;' />
+    <view class='story-title'>{{storyName}}</view>
+    <view class='story-title-explain'>{{content}}</view>
   </view>
 </template>

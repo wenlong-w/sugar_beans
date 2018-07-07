@@ -10,6 +10,7 @@ function doRequest(url, param) {
     param['token'] = hex_md5(param['timeMillis'] + 'waigxcx2018');
     let req = function () {
       beforeRequest(function (res) {
+        console.log('doRequest res', res)
         if (url && url != "") {
           param.session = res.session;
           post(url, param).then(
@@ -47,6 +48,7 @@ function doRequest(url, param) {
 function beforeRequest(call) {
   wxHasCheckedSession().then(
     hcs => {
+      console.log('dddd--', hcs)
       if (hcs.success) {
         wxGetSession().then(
           skRes => {
@@ -117,11 +119,11 @@ function wxCheckSession() {
   return new Promise((resolve, reject) => {
     wx.checkSession({
       success: function () {
-        // console.log('登录没有过期')
+        console.log('登录没有过期')
         resolve({ success: true });
       },
       fail: function () {
-        // console.log('登录过期')
+        console.log('登录过期')
         resolve({ success: false });
       }
     })
@@ -151,14 +153,16 @@ function wxLogin() {
     // 登录
     wx.login({
       success: res => {
+
+        console.log('login:', res)
         wx.removeStorageSync('JSESSIONID')
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         let dt = new Date().getTime();
         let token = hex_md5(dt + 'waigxcx2018');
         post("/ChildrenStory/UserInfoServlet.do", { methodName: 'codeForSession', code: res.code, timeMillis: dt, token: token }).then(
           res => {
+            console.log('JSESSIONID:', res)
             if (res.data.success) {
-              // console.log('JSESSIONID:', res)
               wx.setStorageSync('session_key', res.data.session);
               wx.setStorageSync('has_checked_session', true);
               wx.setStorageSync('JSESSIONID', res.data.JSESSIONID);

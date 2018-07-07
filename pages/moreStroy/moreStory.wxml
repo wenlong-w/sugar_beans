@@ -1,0 +1,4 @@
+<import src="../template/moreStory/moreStory.wxml"/>
+<view wx:for="{{audioList}}" wx:key="{{id}}" class='audio-template' >
+  <template is="moreStory" data="{{...item}}"/>
+</view>

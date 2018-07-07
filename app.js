@@ -44,10 +44,9 @@ App({
   onShow: function (options) {
     // console.log('app onShow')
   },
-  courseAudioListManager: {
+  courseStoryListManager: {
     currentAudio: {},
-    audioList: [],
-    albumAudioList: []
+    storyList: []
   },
   userInfo: null,
   globalBgAudioManager: wx.getBackgroundAudioManager()

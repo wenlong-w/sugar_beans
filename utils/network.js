@@ -13,8 +13,8 @@
  * todo  替换成你自己的
  * @type {string}
  */
-export let rootUrl = "https://www.wenyansoft.com";
-// export let rootUrl = "http://127.0.0.1:8080";
+// export let rootUrl = "https://www.wenyansoft.com";
+export let rootUrl = "http://127.0.0.1:8080";
 
 /**
  * 发送get 请求

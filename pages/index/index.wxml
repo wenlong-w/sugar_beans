@@ -13,12 +13,12 @@
       <view class='album-title'>故事专辑</view>
       <view class='album-title-explain'>每个小故事由多个组成</view>
     </view>
-    <view class='top-more-operate'>更多</view>
+    <view class='top-more-operate' bindtap='toMoreStory'>更多</view>
   </view>
   <view class='story-block'>
-    <view class='story-row' wx:key="{{rowLine}}" wx:for="{{rowLine}}">
-      <template is="indexStory"/>
+    <view class='story-row' wx:for="{{storyList}}" wx:key="{{id}}">
+      <template is="indexStory" data="{{...item}}"/>
     </view>
   </view>
-  <view class='bottom-more-operate'>更多故事</view>
+  <view class='bottom-more-operate' bindtap='toMoreStory'>更多故事</view>
 </view>

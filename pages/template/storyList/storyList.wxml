@@ -1,4 +1,4 @@
-<template name='audioItem' >
+<template name='audioItem'>
   <block wx:if="{{imgFilePath}}"><image class='image' mode="{{mode}}" src="{{imgFilePath}}"></image></block>
   <block wx:else><image class='image' mode="{{mode}}" src="{{imgUrl}}"></image></block>
 

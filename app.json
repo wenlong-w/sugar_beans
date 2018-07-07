@@ -2,8 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/mine/mine",
-    "pages/storyInfo/storyInfo",
-    "pages/playStory/playStory"
+    "pages/moreStroy/moreStory",
+    "pages/playStory/playStory",
+    "pages/storyInfo/storyInfo"
   ],
   "window":{
     "backgroundTextStyle":"light",
