@@ -74,3 +74,6 @@
   margin-right: 10px;
   color: red
 }
+.audition.free{
+  border:0px solid red;
+}

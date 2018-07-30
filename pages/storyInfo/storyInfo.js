@@ -1,153 +1,91 @@
-var util = require('../../utils/util.js'); 
+import { get, post } from "../../utils/network.js"
+
+let util = require('../../utils/util.js'); 
 let app = getApp()
 let currentImage = '';
+const globalStoryManager = app.globalStoryManager;
+
 Page({
   data: {
     currentTab: 0,
-    audioList: [
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%976.m4a",
-        content: "阿里巴巴和四十大盗1",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B46.jpg",
-        id: 1,
-        playNum:2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗2",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%975.m4a",
-        content: "阿里巴巴和四十大盗3",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B45.jpg",
-        id: 2,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗4",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%973.m4a",
-        content: "阿里巴巴和四十大盗5",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B43.jpg",
-        id: 3,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗6",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%975.m4a",
-        content: "阿里巴巴和四十大盗5",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B45.jpg",
-        id: 4,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗5",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%973.m4a",
-        content: "阿里巴巴和四十大盗3",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B43.jpg",
-        id: 5,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗3",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%975.m4a",
-        content: "阿里巴巴和四十大盗5",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B45.jpg",
-        id: 6,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗5",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%973.m4a",
-        content: "阿里巴巴和四十大盗3",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B43.jpg",
-        id: 7,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗3",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%975.m4a",
-        content: "阿里巴巴和四十大盗5",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B45.jpg",
-        id: 8,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗5",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%973.m4a",
-        content: "阿里巴巴和四十大盗3",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B43.jpg",
-        id: 9,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗3",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%973.m4a",
-        content: "阿里巴巴和四十大盗3",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B43.jpg",
-        id: 10,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗10",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%975.m4a",
-        content: "阿里巴巴和四十大盗5",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B45.jpg",
-        id: 11,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗5",
-        mode: "aspectFit"
-      },
-      {
-        audioUrl: "http://audio-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%92%8C%E5%9B%9B%E5%8D%81%E5%A4%A7%E7%9B%973.m4a",
-        content: "阿里巴巴和四十大盗3",
-        dt: "2018-06-02",
-        imgUrl: "http://image-1255464404.file.myqcloud.com/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B43.jpg",
-        id: 12,
-        playNum: 2342,
-        praiseNum: 223,
-        storyName: "阿里巴巴和四十大盗3",
-        mode: "aspectFit"
-      }
-    ]
+    vip: 'no', // 是否需要vip资格
+    audioList: [],
+    enableCharge: 'no'
   },
+  /**
+   * options获取url中的参数
+   * enableCharge: 是否启用收费
+   * vip：是否是高级版音频
+   */
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
-    wx.getImageInfo({
-      src: '../image/test.jpg',
-      success: function (res) {
-        console.log(res);
-      }
-    }) 
+    // globalStoryManager.audioList = this.data.audioList;
+    this.setData({
+      enableCharge: globalStoryManager.chargeStatus,
+      vip: options.vip
+    });
+    wx.setNavigationBarTitle({
+      title: options.storyName
+    });
+    globalStoryManager.audioList = [];
+    
+    let self = this;
+    this.getAudioList(function (audioList) {
+      console.log(audioList);
+      self.setData({
+        audioList: audioList
+      });
+    });
   },
+
+  getAudioList: function (callFun){
+    post('/sugar_beans/AudioServlet.do', { methodName: 'findAudioList', type: '' }).then(
+      reqRes => {
+        console.log('AudioServlet reqRes', reqRes)
+        if (reqRes.data) {
+          if (reqRes.data.result) {
+            let value = reqRes.data.value;
+            let audioList = value.audioList;
+            if (audioList && audioList.length > 0) {
+              audioList.reverse();
+              for (var i = 0; i < audioList.length; i++) {
+                audioList[i].mode = "aspectFit";
+                audioList[i].vip = this.data.vip;
+                audioList[i].dt = util.stampFormatTime(audioList[i].dt.time);
+                globalStoryManager.audioList.push(audioList[i]);
+              }
+              callFun(audioList);
+            } else {
+              callFun([]);
+            }
+          }
+        }
+      },
+      reqErr => {
+        console.log('StoryServlet reqErr', reqErr);
+      }
+    );
+  },
+  
+  /**
+   * 播放某个故事
+   */
+  toPlayAudio: function(event){
+    // wx.navigateTo({
+    //   url: '../playStory/playStory'
+    // })
+
+    let id = event.currentTarget.id;
+    console.log('id:', id);
+    for (var audio of globalStoryManager.audioList) {
+      if (audio.id == id) {
+        globalStoryManager.currentAudio = audio;
+      }
+    }
+    // console.log('globalStoryManager.currentAudio:', globalStoryManager.currentAudio);
+    util.playAudio();
+  },
+
+
   //滑动切换
   swiperTab: function (e) {
     var that = this;
@@ -165,8 +103,7 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
-    console.log('eee',e);
-    if (e.target.dataset.current === '1'){
+    if (e.target.dataset.current === '1') {
       this.setData({
         swiperHeight: 80 * 12 + 55
       })
@@ -184,15 +121,9 @@ Page({
     })
   },
   //点击底部试听按钮
-  toListen: function (){
+  toListen: function () {
     this.setData({
       currentTab: 1
-    })
-  },
-  toPlayAudio: function(){
-    console.log('听故事喽');
-    wx.navigateTo({
-      url: '../playStory/playStory'
     })
   }
 });

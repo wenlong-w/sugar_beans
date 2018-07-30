@@ -2,7 +2,7 @@ const imageUtil = (e) => {
   var imageSize = {};
   var originalWidth = e.detail.width;//图片原始宽  
   var originalHeight = e.detail.height;//图片原始高  
-  console.log('e.detail', e.detail);
+  // console.log('e.detail', e.detail);
   var originalScale = originalHeight / originalWidth;//图片高宽比  
   //获取屏幕宽高  
   wx.getSystemInfo({
@@ -21,13 +21,13 @@ const imageUtil = (e) => {
       }
     }
   })
-  console.log('缩放后的宽: ' + imageSize.imageWidth)
-  console.log('缩放后的高: ' + imageSize.imageHeight)
+  // console.log('缩放后的宽: ' + imageSize.imageWidth)
+  // console.log('缩放后的高: ' + imageSize.imageHeight)
   return imageSize;
 }  
-const playStory = () => {
+const playAudio = () => {
   wx.navigateTo({
-    url: '../playStory/playStory'
+    url: '../playAudio/playAudio'
   })
 }
 const formatTime = date => {
@@ -162,7 +162,7 @@ const add_zero = temp => {
   else return temp;
 }
 module.exports = {
-  playStory: playStory,
+  playAudio: playAudio,
   formatTime: formatTime,
   getDate: getDate,
   checkImgFileUrl: checkImgFileUrl,

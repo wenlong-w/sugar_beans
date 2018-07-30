@@ -144,7 +144,7 @@ Page({
   /**
    * 跳转到故事详情介绍页
    */
-  toStoryInfo: function () {
+  toPlayAudio: function () {
     wx.navigateTo({
       url: '../storyInfo/storyInfo'
     })

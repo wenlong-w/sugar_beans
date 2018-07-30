@@ -1,5 +1,14 @@
-//app.js
+import { get, post } from "./utils/network.js"
 App({
+  globalStoryManager: {
+    chargeStatus: 'no',
+    currentAudio: {},
+    audioList: [],
+    storyList: []
+  },
+  userInfo: null,
+  globalBgAudioManager: wx.getBackgroundAudioManager(),
+
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -40,14 +49,28 @@ App({
         console.log('getSetting err:', err)
       }
     })
+
+    this.getChargeStatus();
+  },
+  /**
+   * 读取收费状态
+   */
+  getChargeStatus: function (callFun) {
+    post('/sugar_beans/CommonServlet.do', { methodName: 'findChargeStatus', type: '' }).then(
+      reqRes => {
+        let data = reqRes.data
+        if (data && data.result) {
+          let value = data.value;
+          let msg = value.msg;
+          this.globalStoryManager.chargeStatus = msg.msgVal;
+        }
+      },
+      reqErr => {
+        console.log('StoryServlet reqErr', reqErr);
+      }
+    );
   },
   onShow: function (options) {
     // console.log('app onShow')
-  },
-  courseStoryListManager: {
-    currentAudio: {},
-    storyList: []
-  },
-  userInfo: null,
-  globalBgAudioManager: wx.getBackgroundAudioManager()
+  }
 })

@@ -3,17 +3,19 @@
   <block wx:else><image class='image' mode="{{mode}}" src="{{imgUrl}}"></image></block>
 
   <view id='{{id}}' class='audio-info' bindtap="toPlayAudio">
-    <view class='title'>{{storyName}}</view>
+    <view class='title'>{{audioName}}</view>
     <view class='audio-num'>
       <view class='audio-num-play'>
         <image class='img-play-num' mode='scaleToFill' src='/pages/image/test.jpg'></image>
-        <view class='right'>{{playNum}}</view>
+        <view class='right'>{{playTime}}</view>
       </view>
       <view class='audio-num-rate'>
         <image class='img-rate-num' mode='scaleToFill' src='/pages/image/test.jpg'></image>
-        <view class='right'>{{praiseNum}}</view>
+        <view class='right'>{{playNum}}</view>
       </view>
     </view>
   </view>
-  <view class='audition'>试听</view>
+  <!-- <view class='audition'>试听</view> -->
+  <view class='audition'  wx:if="{{freeListen==='yes'}}">试听</view>
+  <view class='audition free' wx:else></view>
 </template>

@@ -1,4 +1,4 @@
-@import "../template/storyList/storyList.wxss";
+@import "../template/audioList/audioList.wxss";
 .info-container {
   height: 100%;
   display: flex;

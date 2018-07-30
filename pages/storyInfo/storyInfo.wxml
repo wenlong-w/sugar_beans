@@ -1,5 +1,5 @@
 
-<import src="../template/storyList/storyList.wxml"/>
+<import src="../template/audioList/audioList.wxml"/>
     <image src="http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg"    mode='widthFix' style='width:100%;' />
     <view class='info-title'>
       <view>白雪公主的故事</view>
@@ -24,7 +24,7 @@
           </swiper-item>
       </swiper>
     </view>
-  <view class='add_btn'>  
+  <view class='add_btn' wx:if="{{enableCharge==='yes' && vip==='yes'}}">  
     <button class='btn btn1' bindtap='toListen'>  
         试听
     </button>  
@@ -32,4 +32,6 @@
         立即购买  
     </button> 
   </view>
+  <view wx:else></view>
+
 

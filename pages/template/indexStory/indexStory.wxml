@@ -1,5 +1,5 @@
 <template name='indexStory'>
-  <view id='{{id}}' class='story-view' bindtap="toStoryInfo">
+  <view id='{{storyStr}}' class='story-view' bindtap="toStoryInfo">
     <image src="{{imgUrl}}" mode='widthFix' style='width:46vw;' />
     <view class='story-title'>{{storyName}}</view>
     <view class='story-title-explain'>{{content}}</view>

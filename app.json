@@ -3,8 +3,9 @@
     "pages/index/index",
     "pages/mine/mine",
     "pages/moreStroy/moreStory",
-    "pages/playStory/playStory",
-    "pages/storyInfo/storyInfo"
+    "pages/storyInfo/storyInfo",
+    "pages/playAudio/playAudio"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",
