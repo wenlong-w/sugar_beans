@@ -1,16 +1,22 @@
 <template name='moreStory' >
-  <block wx:if="{{imgFilePath}}"><image class='image' mode="{{mode}}" src="{{imgFilePath}}"></image></block>
+  <block wx:if="{{imgFilePath}}"><image class='image' mode="{{mode}}" src="{{imgFilePath}}" style='border-radius:5px'></image></block>
   <block wx:else><image class='image' mode="{{mode}}" src="{{imgUrl}}"></image></block>
-
   <view id='{{id}}' class='audio-info' bindtap="toPlayAudio">
-    <view class='title'>{{audioName}}</view>
-    <view class='audio-info tro'>
-      <view class='story-info-text'>勇敢的阿里巴巴1</view>
-      <view class='audio-info-play'>
-        <image class='img-play-info' mode='scaleToFill' src='/pages/image/test.jpg'></image>
-        <view class='right'>{{playNum}}</view>
+      <view class='story-info-text'>{{storyName}}</view>
+      <view wx:if="{{count=='0'}}">
+        <view class='more-story-num'>
+          <view class='audio-info-play'>
+            <image class='img-play-info' mode='scaleToFill' src='/pages/image/play/playTime.png'></image>
+            <view class='right'>{{playTime}}</view>
+          </view>
+          <view class='audio-info-play'>
+            <image class='img-play-info' mode='scaleToFill' src='/pages/image/play/toPlay.png'></image>
+            <view class='right'>{{playNum}}</view>
+          </view>
+        </view>
       </view>
-    </view>
+      <view wx:else>
+        <view class='story-count'>{{count}}个小故事</view>
+      </view>
   </view>
-  <view class='audition'>12.00元</view>
 </template>

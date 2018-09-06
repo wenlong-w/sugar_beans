@@ -1,6 +1,5 @@
 .story-view{
-  margin-left: 10px;
-  margin-bottom: 10px;
+  margin-left: 0vw;
 }
 .story-title {
   font-size:16px;
@@ -8,4 +7,20 @@
 .story-title-explain {
   color:#999999;
   font-size:12px;
+}
+.story-count {
+  position:relative;
+  bottom:-26vh;
+  background-color:#000000;
+  width:20vw;
+  border-top-right-radius:1em;
+  border-bottom-right-radius:1em;
+  margin-top: -22px;
+  height: 5vh;
+}
+.story-count.many{
+  opacity:0.6;
+}
+.story-count.single{
+  opacity:0;
 }

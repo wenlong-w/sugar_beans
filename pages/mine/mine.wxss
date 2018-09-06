@@ -103,3 +103,13 @@
   font-weight:bold;
   font-size:16px;
 }
+.low-right-forward{
+  position:fixed;
+  right:18px;
+  bottom:16px;
+  width: 56px;
+  height: 40px
+}
+button[plain]{
+  border: 0px solid red
+}

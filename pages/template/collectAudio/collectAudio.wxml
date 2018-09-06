@@ -1,0 +1,23 @@
+<template name='audioItem' >
+  <block wx:if="{{imgFilePath}}"><image class='image' mode="{{mode}}" src="{{imgFilePath}}"></image></block>
+  <block wx:else><image class='image' mode="{{mode}}" src="{{imgUrl}}"></image></block>
+  
+  <view id='{{id}}' class='audio-info' bindtap="toPlayAudio">
+    <view class='title'>{{storyName}}</view>
+    <view wx:if="{{count=='0'}}">
+        <view class='audio-num'>
+          <view class='audio-num-rate'>
+            <image class='img-rate-num' mode='scaleToFill' src='/pages/image/play/playTime.png'></image>
+            <view class='right'>{{playTime}}</view>
+          </view>
+          <view class='audio-num-play'>
+            <image class='img-play-num' mode='scaleToFill' src='/pages/image/play/toPlay.png'></image>
+            <view class='right'>{{playNum}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:else>
+        <view class='story-count'>{{count}}个小故事</view>
+      </view>
+  </view>
+</template>

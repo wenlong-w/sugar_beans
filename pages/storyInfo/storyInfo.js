@@ -1,55 +1,66 @@
 import { get, post } from "../../utils/network.js"
+import { doRequest } from "../../utils/wxRequest.js"
 
 let util = require('../../utils/util.js'); 
 let app = getApp()
 let currentImage = '';
+let contImg = '';
 const globalStoryManager = app.globalStoryManager;
 
 Page({
   data: {
-    currentTab: 0,
-    vip: 'no', // 是否需要vip资格
+    currentTab: 1,
     audioList: [],
-    enableCharge: 'no'
+    storyName:'',
+    nameStr: '',
+    count: 1
   },
   /**
    * options获取url中的参数
-   * enableCharge: 是否启用收费
-   * vip：是否是高级版音频
    */
   onLoad: function (options) {
-    // globalStoryManager.audioList = this.data.audioList;
-    this.setData({
-      enableCharge: globalStoryManager.chargeStatus,
-      vip: options.vip
-    });
+    console.log('optionsoptions', options);
     wx.setNavigationBarTitle({
       title: options.storyName
     });
     globalStoryManager.audioList = [];
     
+    let storyList = globalStoryManager.storyList;
+    for(var story of storyList){
+      if (story.nameStr === options.nameStr){
+        this.data.count = parseInt(story.count);
+        console.log('story:', story);
+        contImg = story.contImg;
+      }
+    }
+    
     let self = this;
-    this.getAudioList(function (audioList) {
-      console.log(audioList);
+    this.getAudioList(options.nameStr,function (audioList) {
+      console.log('audioList-', audioList);
+
       self.setData({
-        audioList: audioList
+        audioList: audioList,
+        storyName: options.storyName,
+        imgUrl: audioList[0]['imgUrl'],
+        nameStr: options.nameStr,
+        contImg: contImg
       });
     });
   },
 
-  getAudioList: function (callFun){
-    post('/sugar_beans/AudioServlet.do', { methodName: 'findAudioList', type: '' }).then(
+  getAudioList: function (nameStr,callFun){
+    console.log('参数 ', nameStr)
+    doRequest('/ChildrenStory/AudioServlet.do', { methodName: 'findAudioList', nameStr: nameStr }).then(
       reqRes => {
         console.log('AudioServlet reqRes', reqRes)
-        if (reqRes.data) {
-          if (reqRes.data.result) {
-            let value = reqRes.data.value;
+        if (reqRes.success) {
+          if (reqRes.result) {
+            let value = reqRes.result;
             let audioList = value.audioList;
             if (audioList && audioList.length > 0) {
               audioList.reverse();
               for (var i = 0; i < audioList.length; i++) {
                 audioList[i].mode = "aspectFit";
-                audioList[i].vip = this.data.vip;
                 audioList[i].dt = util.stampFormatTime(audioList[i].dt.time);
                 globalStoryManager.audioList.push(audioList[i]);
               }
@@ -84,14 +95,20 @@ Page({
     // console.log('globalStoryManager.currentAudio:', globalStoryManager.currentAudio);
     util.playAudio();
   },
-
-
   //滑动切换
   swiperTab: function (e) {
     var that = this;
     that.setData({
       currentTab: e.detail.current
     });
+    if (e.detail.current===1){
+      let count = this.data.count;
+      this.setData({
+        swiperHeight: 80 * count + 10
+      })
+    }else{
+      this.imageLoad(currentImage);
+    }
   },
   //点击切换
   clickTab: function (e) {
@@ -103,9 +120,11 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
+    console.log('e.target.dataset.current', e.target.dataset.current);
     if (e.target.dataset.current === '1') {
+      let count = this.data.count;
       this.setData({
-        swiperHeight: 80 * 12 + 55
+        swiperHeight: 80 * count + 10
       })
     } else {
       this.imageLoad(currentImage);
@@ -114,16 +133,32 @@ Page({
   imageLoad: function (e) {
     currentImage = e;
     var imageSize = util.imageUtil(e);
+    let tabHeight = 0;
+    if (this.data.currentTab===1){
+      tabHeight = this.data.count * 80 + 10;
+    } else {
+      tabHeight = imageSize.imageHeight;
+    }
     this.setData({
       imageWidth: imageSize.imageWidth,
       imageHeight: imageSize.imageHeight,
-      swiperHeight: imageSize.imageHeight + 186
+      swiperHeight: tabHeight
     })
   },
-  //点击底部试听按钮
-  toListen: function () {
-    this.setData({
-      currentTab: 1
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function (options) {
+    
+  },
+  onShow: function () {
+    console.log('globalStoryManager1', globalStoryManager);
+  },
+  goBack: function () {
+    // console.log('back');
+    globalStoryManager.audioList = [];
+    wx.navigateBack({
+      delta: 1
     })
   }
 });

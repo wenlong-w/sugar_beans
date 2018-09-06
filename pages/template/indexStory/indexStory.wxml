@@ -1,6 +1,15 @@
 <template name='indexStory'>
-  <view id='{{storyStr}}' class='story-view' bindtap="toStoryInfo">
-    <image src="{{imgUrl}}" mode='widthFix' style='width:46vw;' />
+  <view id='{{id}}' class='story-view' bindtap="toStoryInfo">
+    <view wx:if="{{count>0}}">
+      <view class='story-count many'>
+        <view style='font-size:12px; color:#fff;margin-left:2vw;padding-top:1vh;'>{{count}}个小故事</view>
+      </view>
+    </view><view wx:else>
+      <view class='story-count single'>
+        <view style='font-size:12px; color:#fff;margin-left:2vw'>1个小故事</view>
+      </view>
+    </view>
+    <image src="{{imgUrl}}" mode='widthFix' style='width:43vw;border-radius:5px' />
     <view class='story-title'>{{storyName}}</view>
     <view class='story-title-explain'>{{content}}</view>
   </view>

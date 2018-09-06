@@ -1,10 +1,10 @@
 import { get, post } from "./utils/network.js"
 App({
   globalStoryManager: {
-    chargeStatus: 'no',
     currentAudio: {},
     audioList: [],
-    storyList: []
+    storyList: [],
+    singleStoryList: []
   },
   userInfo: null,
   globalBgAudioManager: wx.getBackgroundAudioManager(),
@@ -24,7 +24,7 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
-        // console.log('getSetting   res:', res)
+        console.log('getSetting   res:', res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
@@ -50,25 +50,6 @@ App({
       }
     })
 
-    this.getChargeStatus();
-  },
-  /**
-   * 读取收费状态
-   */
-  getChargeStatus: function (callFun) {
-    post('/sugar_beans/CommonServlet.do', { methodName: 'findChargeStatus', type: '' }).then(
-      reqRes => {
-        let data = reqRes.data
-        if (data && data.result) {
-          let value = data.value;
-          let msg = value.msg;
-          this.globalStoryManager.chargeStatus = msg.msgVal;
-        }
-      },
-      reqErr => {
-        console.log('StoryServlet reqErr', reqErr);
-      }
-    );
   },
   onShow: function (options) {
     // console.log('app onShow')

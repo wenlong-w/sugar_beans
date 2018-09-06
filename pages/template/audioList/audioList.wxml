@@ -6,16 +6,13 @@
     <view class='title'>{{audioName}}</view>
     <view class='audio-num'>
       <view class='audio-num-play'>
-        <image class='img-play-num' mode='scaleToFill' src='/pages/image/test.jpg'></image>
+        <image class='img-play-num' mode='scaleToFill' src='/pages/image/play/playTime.png'></image>
         <view class='right'>{{playTime}}</view>
       </view>
       <view class='audio-num-rate'>
-        <image class='img-rate-num' mode='scaleToFill' src='/pages/image/test.jpg'></image>
+        <image class='img-rate-num' mode='scaleToFill' src='/pages/image/play/toPlay.png'></image>
         <view class='right'>{{playNum}}</view>
       </view>
     </view>
   </view>
-  <!-- <view class='audition'>试听</view> -->
-  <view class='audition'  wx:if="{{freeListen==='yes'}}">试听</view>
-  <view class='audition free' wx:else></view>
 </template>

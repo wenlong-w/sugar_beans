@@ -4,8 +4,9 @@
     "pages/mine/mine",
     "pages/moreStroy/moreStory",
     "pages/storyInfo/storyInfo",
-    "pages/playAudio/playAudio"
-    
+    "pages/playAudio/playAudio",
+    "pages/mine/collect/collect",
+    "pages/mine/tdAboutMe/aboutMe"
   ],
   "window":{
     "backgroundTextStyle":"light",

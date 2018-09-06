@@ -1,44 +1,49 @@
+<image src='{{imgUrl}}' style='width:100%' mode='aspectFill'></image>
 <view class='play-container'>
-  <image src='{{imgUrl}}' mode='widthFix' style='width:100%;' />
-  <view class='process-body'>
+  <view class='top'>
+    <!--  音频进度控件 -->
+    <view class="audio-control-process">
+      <!-- 左值展示，currentProcess -->
+      <text class="current-process">{{currentProcess}}</text>
+      <view class='process-body'>
         <!-- 进度条 -->
-        <slider
-        bindchange="hanleSliderChange" 
+        <slider bindchange="hanleSliderChange" 
         bindtouchstart="handleSliderMoveStart" 
         bindtouchend="handleSliderMoveEnd" 
-        min="0" max="{{sliderMax}}"
-        activeColor="#FFA500"
-        backgroundColor="#FFF"
-        block-size="20" 
-        block-color="#FFA500"
-        value="{{sliderValue}}"/>
-  </view>
-  <view class='process-value'>
-    <text class="current-process">{{currentProcess}}</text>
-    <text class="total-process">{{totalProcess}}</text>
-  </view>
-  <view>
-    <view class='bg bg-blur'></view>
-      <view class='content content-front'>
-        <view class='title'>{{audioTitle}}</view>
-        <view class='play-button'>
-          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='beforeStory'></image>
-          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img'></image>
-          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img'bindtap='nextStory'></image>
-        </view>
-        <view class='operate-button'>
-          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toCollect'></image>
-          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toPraise'></image>
-          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toSetTime'></image>
-          <image src='../image/play/toPlay.png' mode='aspectFit' class='play-img' bindtap='toShare'></image>
-        </view>
-      </view>   
-  </view>
-  
+        min="0" max="{{sliderMax}}" 
+        activeColor="#8f7df0" 
+        value="{{sliderValue}}" />
+      </view>
+      <!-- 右值展示，totalProcess -->
+      <text class="total-process">{{totalProcess}}</text>
+    </view>
+    <view class='audio-control-button'>
+      <image bindtap='toPreAudio' class='pre-audio' src='../image/play/preAudio.jpg' mode='aspectFit'></image>
+      <image bindtap='toPlayAudio' class='play-audio' style='display:{{playAudioDisplay}}' src='../image/play/playAudio.jpg' mode='aspectFit'></image>
+      <image bindtap='toPauseAudio' class='play-audio' style='display:{{pauseAudioDisplay}}' src='../image/play/pauseAudio.jpg' mode='aspectFit'></image>
+      <image bindtap='toNextAudio' class='next-audio' src='../image/play/nextAudio.jpg' mode='aspectFit'></image>
+    </view>
 
-
-  <!--https://blog.csdn.net/libin_1/article/details/51927430
-  https://www.cnblogs.com/PeunZhang/p/4089894.html 
-  https://blog.csdn.net/ohehehou/article/details/51975539
-   -->
+    <view class='audio-info'>
+      <view class='audio-title'>{{audioTitle}}</view>
+      <view class='num'>
+        <!-- <view class='num-child'>时间：{{dt}}</view> -->
+        <view class='num-child'>播放次数：{{playNum}}</view>
+        <view class='num-child'>播放时长：{{playTime}}</view>
+        <!-- <view class='num-child'>点赞：{{praiseNum}}</view> -->
+      </view>
+    </view>
+  </view>
+</view>
+<button class='low-right-forward' open-type="share" plain="true" hover-class="none">
+  <image src='../image/index/tdForward.png' style='width:40px;height:40px'></image>
+</button>
+<view class='low-right-collect' bindtap='tdCollect' style='display:{{preCollectDisplay}}'>
+  <image src='../image/play/collect.png' style='width:40px;height:40px'></image>
+</view>
+<view class='low-right-collect' bindtap='unCollect' style='display:{{collectDisplay}}'>
+  <image src='../image/play/unCollect.png' style='width:40px;height:40px'></image>
+</view>
+<view class='low-right-back' bindtap='goBack'>
+  <image src='../image/index/tdBack.png' style='width:40px;height:40px'></image>
 </view>

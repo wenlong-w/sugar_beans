@@ -1,1 +1,18 @@
 @import "../template/moreStory/moreStory.wxss";
+.low-right-forward{
+  position:fixed;
+  right:18px;
+  bottom:56px;
+}
+.low-right-back{
+  position:fixed;
+  right:18px;
+  bottom:20px;
+}
+.bottom{
+  display: none
+}
+button[plain]{
+  border: 0px solid red;
+  padding-right:0px;
+}

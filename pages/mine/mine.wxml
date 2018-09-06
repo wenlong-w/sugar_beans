@@ -19,29 +19,24 @@
     <view class='point-view'>...</view>
   </view>
   <view class='button-view'>
-    <view class='line' bindtap='toDiaryBind'>
-      <image src='../image/xiaoji.png'></image>
-      <view class='line-right reward'>
-        <view class='title'>已购买的</view>
-        <view class='brief-introduction'>记录生活中关于小糖豆的一点点小事 ^_^</view>
+    <view class='line' bindtap='toCollectView'>
+      <image src='../image/mine/tdCheckedCollect.png'></image>
+      <view class='line-right collect'>
+        <view class='title'>收藏</view>
+        <view class='brief-introduction'>这里有您收藏的小故事</view>
       </view>
     </view>
-    <view class='line' bindtap='toPraiseView'>
-      <image src='../image/mine/checkedCollect.png'></image>
-      <view class='line-right reward'>
-        <view class='title'>我喜欢的</view>
-        <view class='brief-introduction'>您的鼓励和支持也是我们不断维护的动力</view>
-      </view>
-    </view>
-    
   </view>
   <view class='button-view'>
     <view class='line' bindtap="aboutMe">
       <image src='../image/mine/about.png'></image>
       <view class='line-right about-me'>
-        <view class='title'>联系客服</view>
+        <view class='title'>关于</view>
         <view class='brief-introduction'>出品人信息</view>
       </view>
     </view>
   </view>
 </view>
+<button class='low-right-forward' open-type="share" plain="true" hover-class="none">
+  <image src='../image/index/tdForward.png' style='width:40px;height:40px'></image>
+</button>

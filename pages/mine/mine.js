@@ -48,7 +48,7 @@ Page({
   },
   aboutMe: function () {
     wx.navigateTo({
-      url: './aboutMe/aboutMe'
+      url: './tdAboutMe/aboutMe'
     })
   },
   /**
@@ -59,14 +59,7 @@ Page({
       url: './collect/collect'
     })
   },
-  /**
-   * 跳转到足迹
-   */
-  toFootPrint: function (event) {
-    wx.navigateTo({
-      url: './footPrint/footPrint'
-    })
-  },
+  
   onShow: function () {
     wx.setNavigationBarTitle({
       title: '我的'
@@ -79,8 +72,8 @@ Page({
     this.animation = animation
   },
   onLoad: function () {
-    // console.log('app.userInfo ', app.userInfo);
-    // console.log('this.data.canIUse ', this.data.canIUse);
+    console.log('app.userInfo ', app.userInfo);
+    console.log('this.data.canIUse ', this.data.canIUse);
     if (app.userInfo) {
       this.setData({
         userInfo: app.userInfo,
@@ -90,7 +83,7 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        // console.log('res=====',res);
+        console.log('res=====',res);
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -111,7 +104,7 @@ Page({
     // wx.getStorageSync(key)
     let self = this;
     wx.getStorage({
-      key: 'you_find_me_date',
+      key: 'td_you_find_me_date',
       success: function (res) {
         // console.log('缓存的：',res.data)
         let dtArr = res.data.split('-');
@@ -128,13 +121,14 @@ Page({
     })
   },
   findDate: function () {
-    doRequest('/ChildrenStory/UserInfoServlet.do', { methodName: 'find' }).then(
+    doRequest('/ChildrenStory/TDUserInfoServlet.do', { methodName: 'find' }).then(
       dtRes => {
+        console.log('dtResdtRes', dtRes);
         if (dtRes.success) {
 
           let dt = util.stampFormatTime(dtRes.result.time);
           wx.setStorage({
-            key: 'you_find_me_date',
+            key: 'td_you_find_me_date',
             data: dt,
           })
           // console.log(dt);
@@ -159,7 +153,7 @@ Page({
         userInfo: e.detail.userInfo,
         hasUserInfo: true
       });
-      doRequest("/ChildrenStory/UserInfoServlet.do", {
+      doRequest("/ChildrenStory/TDUserInfoServlet.do", {
         methodName: 'save',
         avatarUrl: app.userInfo.avatarUrl,
         city: app.userInfo.city,
@@ -173,5 +167,25 @@ Page({
           console.log('rrres--', res);
         })
     }
-  }
+  },
+  /**
+   * 分享
+   */
+  onShareAppMessage: function (res) {
+    // console.log('转发回调',res)
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: '快乐儿童故事',
+      path: "pages/index/index",
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
 })

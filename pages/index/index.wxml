@@ -10,15 +10,31 @@
 <view class="index-container">
   <view class='story-album-operate'>
     <view class='story-album'>
-      <view class='album-title'>故事专辑</view>
-      <view class='album-title-explain'>每个小故事由多个组成</view>
+      <view class='album-title'>小故事</view>
+      <view class='album-title-explain'>小故事蕴含着大道理</view>
     </view>
-    <view class='top-more-operate' bindtap='toMoreStory'>更多</view>
+    <view class='top-more-operate' bindtap='toMoreStory'>更多 </view>
   </view>
   <view class='story-block'>
     <view class='story-row' wx:for="{{storyList}}" wx:key="{{id}}">
       <template is="indexStory" data="{{...item}}"/>
     </view>
   </view>
-  <view class='bottom-more-operate' bindtap='toMoreStory'>更多故事</view>
+  <view class='bottom-more-operate-all' bindtap='toMoreStory'>更多故事</view>
+  <view class='story-album-operate'>
+    <view class='story-album'>
+      <view class='album-title'>精选专辑</view>
+      <view class='album-title-explain'>每个小故事由多个组成</view>
+    </view>
+    <view class='top-more-operate' bindtap='toMoreAlbumStory'>更多</view>
+  </view>
+  <view class='story-block'>
+    <view class='story-row' wx:for="{{albumList}}" wx:key="{{id}}">
+      <template is="indexStory" data="{{...item}}"/>
+    </view>
+  </view>
+  <view class='bottom-more-operate' bindtap='toMoreAlbumStory'>更多故事</view>
 </view>
+<button class='low-right-forward' open-type="share" plain="true" hover-class="none">
+  <image src='../image/index/tdForward.png' style='width:40px;height:40px'></image>
+</button>

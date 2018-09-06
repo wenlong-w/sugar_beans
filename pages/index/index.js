@@ -5,40 +5,70 @@ import { doRequest } from "../../utils/wxRequest.js"
 //获取应用实例
 const app = getApp();
 const globalStoryManager = app.globalStoryManager;
+const singleStoryList = globalStoryManager.singleStoryList;
 
 Page({
   data: {
     imgUrls: [
-      '../image/index/listenToMe.jpg',
-      // '../image/doPraise.jpg',
-      '../image/index/diary.jpg'
-      // '../image/listenToMe.jpg',
-      // 'http://image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg'
+      
     ],
     indicatorDots: true,
     autoplay: true,
-    interval: 3000,
+    interval: 4000,
     duration: 1200,
-    storyList: [
-
-    ]
+    storyList: [],
+    albumList: []
   },
   onShow: function () {
-    console.log('index onshow');
+    console.log('globalStoryManager1', globalStoryManager);
     wx.setNavigationBarTitle({
-      title: '糖豆妈妈睡前故事'
+      title: '快乐儿童故事'
     });
     globalStoryManager.storyList = [];
     let self = this;
     this.getStoryList(function (storyList) {
-      // console.log(storyList);
+      let list1 = []; //只展示最新的四个故事
+      let list2 = []; //只展示四个专辑故事
+      let list3 = []; //从专辑故事中挑选3个作为顶部轮播
+      for (var story of storyList){
+        if(story.count!='0'){
+          list2.push(story);
+        }
+        if(list2.length === 4){
+          break;
+        }
+      }
+      for (var story of storyList) {
+        if (story.count != '0' && story.type==='0') {
+          list3.push(story);
+        }
+        if (list3.length === 3) {
+          break;
+        }
+      }
+      let topImgUrl = [];
+      console.log('list3', list3);
+      for(var story of list3){
+        topImgUrl.push(story.imgUrl);
+      }
+      storyList.slice(1);
+      list1 = storyList.slice(0, 4);
+
       self.setData({
-        storyList: storyList
+        storyList: list1,
+        albumList: list2,
+        imgUrls: topImgUrl
       });
+
+      for (var story of storyList) {
+        if (story.count === '0') {
+          singleStoryList.push(story);
+        }
+      }
     });
   },
-  onLoad: function () {
-    console.log('index onLoad');
+  onReady: function () {
+    
   },
   
   /**
@@ -47,10 +77,10 @@ Page({
    */
   getStoryList: function (callFun) {
     let nowDate = util.getDate();
-    let cacheDate; //缓存某天的日期 例如：2018-01-16
+    let cacheDate; //缓存某天的日期 例如：2018-08-11
     let storyList = [];
     try {
-      cacheDate = wx.getStorageSync('now_date');
+      cacheDate = wx.getStorageSync('td_now_date');
       if (cacheDate) {
         // console.log("cacheDate:",cacheDate);
       }
@@ -58,10 +88,8 @@ Page({
 
     }
     try {
-      storyList = wx.getStorageSync('story_list');
-      if (storyList && storyList != null && storyList != 'null'
-        && storyList != 'undefined' && storyList != undefined
-        && storyList != '') {
+      storyList = wx.getStorageSync('td_story_list');
+      if (storyList) {
         storyList = storyList;
       } else {
         storyList = [];
@@ -70,7 +98,7 @@ Page({
       console.log('storyList catch:', e);
       storyList = [];
     }
-    // cacheDate = 1;
+    // cacheDate = 2;
     if (cacheDate == nowDate && storyList.length > 0) {
       // console.log('storyList直接用缓存的');
       for (let m = 0; m < storyList.length; m++) {
@@ -79,12 +107,12 @@ Page({
       callFun(storyList);
     } else {
       console.log('storyList 后台');
-      post('/sugar_beans/StoryServlet.do', { methodName: 'findStoryList', type: '' }).then(
+      doRequest('/ChildrenStory/TDStoryServlet.do', { methodName: 'findStoryList', type: '' }).then(
         reqRes => {
           console.log('StoryServlet reqRes', reqRes)
-          if(reqRes.data){
-            if(reqRes.data.result){
-              let value = reqRes.data.value;
+          if(reqRes.success){
+            if(reqRes.result){
+              let value = reqRes.result;
               let storyList = value.storyList;
               if (storyList && storyList.length > 0) {
                 for (var i = 0; i < storyList.length; i++) {
@@ -92,8 +120,8 @@ Page({
                   storyList[i].dt = util.stampFormatTime(storyList[i].dt.time);
                   globalStoryManager.storyList.push(storyList[i]);
                 }
-                wx.setStorageSync('story_list', storyList);
-                wx.setStorageSync('now_date', nowDate);
+                wx.setStorageSync('td_story_list', storyList);
+                wx.setStorageSync('td_now_date', nowDate);
                 callFun(storyList);
               } else {
                 callFun([]);
@@ -105,32 +133,6 @@ Page({
           console.log('StoryServlet reqErr', reqErr);
         }
       );
-
-      /**
-       * 
-      doRequest('/suger_beans/StoryServlet.do', { methodName: 'findStoryList', type: '' }).then(
-        res => {
-          console.log('storyList         res:', res);
-          if (res.success) {
-            let storyList = res.result.storyList;
-            if (storyList && storyList.length > 0) {
-              for (var i = 0; i < storyList.length; i++) {
-                storyList[i].mode = "aspectFit";
-                storyList[i].dt = util.stampFormatTime(storyList[i].dt.time);
-                globalStoryManager.storyList.push(storyList[i]);
-              }
-              wx.setStorageSync('story_list', storyList);
-              wx.setStorageSync('now_date', nowDate);
-              callFun(storyList);
-            } else {
-              callFun([]);
-            }
-          } else {
-            callFun([]);
-          }
-        }
-      );
-      */
     }
   },
   /**
@@ -138,26 +140,44 @@ Page({
    */
   toStoryInfo: function (event) {
     let id = event.currentTarget.id;
-    let vip = 'no';
-    let storyName = '糖豆妈妈睡前故事';
+    let storyName = '';
     let storyList = globalStoryManager.storyList;
+    let story;
     for (let i= 0; i < storyList.length; i++){
-      let story = storyList[i];
-      if(story.storyStr === id){
-        vip = story.vip;
+      story = storyList[i];
+      if(story.id == id){
         storyName = story.storyName;
         break;
       }
     }
-    wx.navigateTo({
-      url: '../storyInfo/storyInfo?storyStr=' + id + '&vip=' + vip + '&storyName=' + storyName
-    })
+    if(story.count=='0'){
+      globalStoryManager.currentAudio = story;
+      util.playAudio();
+    }else{
+      wx.navigateTo({
+        url: '../storyInfo/storyInfo?nameStr=' + story.nameStr + '&storyName=' + storyName
+      })
+    }
   },
+  /**
+   * 更多所有故事
+   */
   toMoreStory: function(){
     wx.navigateTo({
-      url: '../moreStroy/moreStory'
+      url: '../moreStroy/moreStory?type=all'
     })
   },
+  /**
+   * 更多专辑故事
+   */
+  toMoreAlbumStory: function () {
+    wx.navigateTo({
+      url: '../moreStroy/moreStory?type=album'
+    })
+  },
+  /**
+   * 分享
+   */
   onShareAppMessage: function (res) {
     // console.log('转发回调',res)
     if (res.from === 'button') {
@@ -165,7 +185,7 @@ Page({
       // console.log(res.target)
     }
     return {
-      title: '糖豆妈妈讲故事',
+      title: '快乐儿童故事',
       path: "pages/index/index",
       success: function (res) {
         // 转发成功
@@ -174,5 +194,23 @@ Page({
         // 转发失败
       }
     }
-  }
+  },
+  /**
+   * 顶部轮播跳转
+   */
+  topDo: function (e) {
+    console.log(e.target.id);
+    console.log(globalStoryManager)
+    let storyList = globalStoryManager.storyList;
+    let currStory;
+    for(var story of storyList){
+      if (e.target.id===story.imgUrl){
+        currStory = story;
+        break;
+      }
+    }
+    wx.navigateTo({
+      url: '../storyInfo/storyInfo?nameStr=' + currStory.nameStr + '&storyName=' + currStory.storyName
+    })
+  },
 })
