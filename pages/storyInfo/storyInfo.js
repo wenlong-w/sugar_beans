@@ -154,6 +154,24 @@ Page({
   onShow: function () {
     console.log('globalStoryManager1', globalStoryManager);
   },
+  /**
+   * 转发
+   */
+  onShareAppMessage: function (res) {
+    const randomImage = Math.floor((Math.random() * (globalStoryManager.shareImage.length)));
+    return {
+      title: '快乐儿童故事',
+      desc: '重温经典，带孩子走进一个美丽的故事世界。',
+      path: '/pages/index/index',
+      imageUrl: globalStoryManager.shareImage[randomImage],
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
   goBack: function () {
     // console.log('back');
     globalStoryManager.audioList = [];

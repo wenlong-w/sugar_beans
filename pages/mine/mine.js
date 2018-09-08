@@ -3,6 +3,7 @@ const util = require('../../utils/util.js');
 
 //获取应用实例
 const app = getApp()
+let globalStoryManager = app.globalStoryManager; //全局故事列表，包含：故事列表、当前播放的故事
 
 Page({
   data: {
@@ -172,14 +173,12 @@ Page({
    * 分享
    */
   onShareAppMessage: function (res) {
-    // console.log('转发回调',res)
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      // console.log(res.target)
-    }
+    const randomImage = Math.floor((Math.random() * (globalStoryManager.shareImage.length)));
     return {
       title: '快乐儿童故事',
-      path: "pages/index/index",
+      desc: '重温经典，带孩子走进一个美丽的故事世界。',
+      path: '/pages/index/index',
+      imageUrl: globalStoryManager.shareImage[randomImage],
       success: function (res) {
         // 转发成功
       },

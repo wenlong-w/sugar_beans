@@ -167,5 +167,5 @@ module.exports = {
   getDate: getDate,
   checkImgFileUrl: checkImgFileUrl,
   stampFormatTime: stampFormatTime,
-  imageUtil: imageUtil  
+  imageUtil: imageUtil
 }

@@ -28,4 +28,3 @@
 <view class='low-right-back' bindtap='goBack'>
   <image src='../image/index/tdBack.png' style='width:40px;height:40px'></image>
 </view>
-

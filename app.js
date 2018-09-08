@@ -4,7 +4,14 @@ App({
     currentAudio: {},
     audioList: [],
     storyList: [],
-    singleStoryList: []
+    singleStoryList: [],
+    shareImage: [
+      'http://td-image-1255464404.file.myqcloud.com/%E5%8D%96%E7%81%AB%E6%9F%B4%E7%9A%84%E5%B0%8F%E5%A5%B3%E5%AD%A9.jpg',
+      'http://td-image-1255464404.file.myqcloud.com/%E7%99%BD%E9%9B%AA%E5%85%AC%E4%B8%BB.jpg',
+      'http://td-image-1255464404.file.myqcloud.com/%E5%86%9C%E5%A4%AB%E5%92%8C%E8%9B%87.jpg',
+      'http://td-image-1255464404.file.myqcloud.com/%E5%B0%8F%E9%A9%AC%E8%BF%87%E6%B2%B3.jpg'
+      
+    ]
   },
   userInfo: null,
   globalBgAudioManager: wx.getBackgroundAudioManager(),
